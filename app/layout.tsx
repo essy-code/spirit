@@ -33,7 +33,7 @@ export default function RootLayout({
         {/* FOOTER */}
         <footer className="footer mt-10">
           <div className="container py-4 text-center text-sm">
-            © 2026 Spirit Surge Network
+            © 2026 Spirit Surge Network.
           </div>
         </footer>
 

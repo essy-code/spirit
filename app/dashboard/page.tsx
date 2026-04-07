@@ -10,7 +10,7 @@ export default async function AdminDashboard() {
     <div className="space-y-8">
 
       <h1 className="text-2xl font-bold text-purple-400">
-        Admin Dashboard
+        Admin Dashboard.
       </h1>
 
       {/* USERS */}

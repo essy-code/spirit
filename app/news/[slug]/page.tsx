@@ -41,6 +41,14 @@ export default async function PostPage({
         </p>
       </div>
 
+      <a
+  href={`https://wa.me/?text=${encodeURIComponent("Check this out: " + post.title)}`}
+  target="_blank"
+  className="btn"
+>
+  Share on WhatsApp
+</a>
+
       <p className="text-gray-300 leading-8 whitespace-pre-line">
         {post.content}
       </p>

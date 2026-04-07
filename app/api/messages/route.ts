@@ -1,12 +1,22 @@
 import { prisma } from "@/lib/prisma";
+import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-  const body = await req.json();
+  try {
+    const body = await req.json();
 
-  return prisma.message.create({
-    data: {
-      content: body.content,
-      userId: body.userId,
-    },
-  });
+    const message = await prisma.message.create({
+      data: {
+        content: body.content,
+        userId: body.userId,
+      },
+    });
+
+    return NextResponse.json(message); // ✅ FIX
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to send message" },
+      { status: 500 }
+    );
+  }
 }

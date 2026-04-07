@@ -6,35 +6,42 @@ export default async function PostPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  // 🔥 FIX: await params (IMPORTANT for Next.js 16)
   const { slug } = await params;
 
-  if (!slug) return notFound();
-
   const post = await prisma.post.findFirst({
-    where: {
-      slug: slug,
+    where: { slug },
+    include: {
+      category: true,
     },
   });
 
   if (!post) return notFound();
 
   return (
-    <div className="max-w-3xl mx-auto">
+    <div className="max-w-3xl mx-auto space-y-6">
 
       {post.image && (
         <img
           src={post.image}
-          alt=""
-          className="w-full rounded-xl mb-6"
+          className="w-full rounded-xl"
         />
       )}
 
-      <h1 className="text-3xl font-bold mb-4">
-        {post.title}
-      </h1>
+      <div>
+        <span className="text-xs bg-red-600 px-2 py-1 rounded">
+          {post.category?.name}
+        </span>
 
-      <p className="text-gray-300 leading-7 whitespace-pre-line">
+        <h1 className="text-3xl font-bold mt-2">
+          {post.title}
+        </h1>
+
+        <p className="text-sm text-gray-400 mt-1">
+          {new Date(post.createdAt).toDateString()}
+        </p>
+      </div>
+
+      <p className="text-gray-300 leading-8 whitespace-pre-line">
         {post.content}
       </p>
 
